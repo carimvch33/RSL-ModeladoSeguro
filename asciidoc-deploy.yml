@@ -1,0 +1,30 @@
+name: Build and Deploy AsciiDoc
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@v3
+
+      - name: Instalar Asciidoctor
+        run: sudo apt-get install -y asciidoctor
+
+      - name: Compilar a HTML
+        run: |
+          mkdir public
+          asciidoctor index.adoc -D public -a toc=left
+          cp -r images public/images || true
+
+      - name: Publicar en GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
