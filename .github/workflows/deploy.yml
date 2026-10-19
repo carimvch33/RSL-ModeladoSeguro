@@ -7,12 +7,10 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Descargar repositorio
@@ -26,22 +24,12 @@ jobs:
 
       - name: Compilar AsciiDoc a HTML
         run: |
-          mkdir -p dist
-          asciidoctor -a source-highlighter=rouge -a icons=font index.adoc -o dist/index.html
-          if [ -d "images" ]; then cp -r images dist/; fi
+          mkdir -p public
+          asciidoctor -a source-highlighter=rouge -a icons=font index.adoc -o public/index.html
+          if [ -d "images" ]; then cp -r images public/; fi
 
-      - name: Subir artefacto de Pages
-        uses: actions/upload-pages-artifact@v3
+      - name: Desplegar a rama gh-pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          path: dist
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Desplegar a GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
