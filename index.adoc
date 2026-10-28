@@ -1,4 +1,4 @@
-= Catálogo de Artefactos para el Modelado Seguro
+= Catálogo de Artefactos de Diseño para el Modelado de Software Seguro
 :toc: left
 :toclevels: 3
 :sectnums:
