@@ -1,40 +1,82 @@
-= Catálogo de Artefactos de Diseño para el Modelado de Software Seguro
+= Catálogo de Artefactos de Diseño para el Modelado Seguro
 :toc: left
 :toclevels: 3
 :sectnums:
-:icons: font
 :source-highlighter: rouge
 
-== Introducción y contexto
+== Introducción
 
-=== Propósito
-Este catálogo es un recurso práctico y metodológico diseñado para cualquier profesional de la industria, arquitecto de software, estudiante o entusiasta interesado en modelar y aplicar seguridad desde las fases iniciales del diseño de sistemas.
+=== Propósito del catálogo
+En la Ingeniería de Software contemporánea, la seguridad no puede considerarse un atributo implícito ni una capa añadida en etapas de producción. La evidencia señala que aproximadamente el 50% de las vulnerabilidades en los sistemas tienen su origen en deficiencias a nivel de diseño. Sin embargo, existe una brecha de conocimiento que provoca que el modelado seguro sea omitido debido a la complejidad de las herramientas y la alta dependencia del juicio de expertos.
 
-=== Prerrequisitos generales
-Antes de utilizar este catálogo, el lector debe poseer conocimientos básicos en:
-- Arquitectura de software (patrones, componentes y conectores).
-- Lenguaje Unificado de Modelado (UML) básico.
-- Conceptos de redes y flujo de datos.
+Este catálogo es un recurso de referencia estructurado que busca resolver este problema de toma de decisiones. Su contenido y directrices no son arbitrarios; han sido construidos bajo la metodología *Design Science Research Methodology (DSRM)*. Los artefactos aquí presentados han sido sintetizados a partir de una Revisión Sistemática de la Literatura (RSL), la cual filtró más de 770 estudios para seleccionar los 39 artefactos más vigentes y validados de la última década, además de ser complementada con literatura gris y documentación técnica oficial de la industria.
 
-=== Glosario de términos
-- *Vulnerabilidad:* Debilidad en el sistema.
-- *Amenaza:* Potencial explotación de una vulnerabilidad.
-- *Mitigación:* Control diseñado para reducir el riesgo.
+=== Uso previsto
+Este catálogo está diseñado como una herramienta de consulta específica y no como un documento de lectura secuencial. El usuario debe identificar primero la amenaza que su sistema enfrenta, consultar la Matriz de selección de artefactos para determinar qué modelo gráfico utilizar, y dirigirse directamente a la sección correspondiente para aplicar las reglas de diseño y mitigación de dicho artefacto.
+
+=== Alcances y limitaciones
+Para facilitar la correcta aplicación de este catálogo, se delimita su entorno de uso:
+
+* *Alcances:* 
+** Se enfoca exclusivamente en la etapa de diseño y arquitectura de software.
+** Proporciona la sintaxis visual, guías de construcción y checklists de auditoría para los artefactos de seguridad con mayor nivel de adopción en el modelado seguro.
+** Clasifica y aborda las amenazas basándose  en la taxonomía STRIDE.
+
+* *Limitaciones:*
+** No aborda la implementación a nivel de código fuente, configuraciones de infraestructura de red ni despliegue de servidores.
+** No incluye validaciones empíricas del software final; su correcta aplicación reduce los riesgos arquitectónicos, pero no sustituye las auditorías formales por parte de especialistas en ciberseguridad ni garantiza la invulnerabilidad total del sistema.
+
+=== Prerrequisitos
+Para aprovechar al máximo este catálogo, el lector debe contar con las siguientes bases:
+
+. *Conocimientos técnicos:*
+** Comprensión del Ciclo de Vida del Desarrollo de Software (SDLC).
+** Diseño de software básico (patrones, componentes, conectores, etc.).
+** Fundamentos del Lenguaje Unificado de Modelado (UML) y flujo de datos.
+. *Enfoque y actitud:*
+** Pensamiento orientado al adversario, es decir, el lector debe asumir que el sistema será atacado.
+** Compromiso con la integración de la seguridad como un atributo de calidad desde la concepción del sistema, y no como un parche posterior.
+
+=== Glosario
+En ciberseguridad, es común el uso de términos que, aunque parecen similares, tienen significados distintos. Para garantizar la consistencia en el modelado, se establecen las siguientes definiciones formales basadas en la literatura:
+
+* *Vulnerabilidad:* Falla, debilidad o imperfección técnica en el diseño, la arquitectura o el código del sistema que abre la puerta a un vector de ataque. La fase de diseño es la más susceptible a generar estas debilidades [1].
+* *Amenaza:* Cualquier individuo, circunstancia o acción que tenga la capacidad y la intención de aprovechar una vulnerabilidad existente en un sistema para producir un impacto adverso [2].
+* *Ataque y Atacante:* El ataque se define como la acción ofensiva contra la ciberinfraestructura de un objetivo. El atacante es la entidad adversaria (activa o pasiva) que ejecuta la acción buscando violar las garantías de seguridad [2], [3].
+* *Riesgo:* La posibilidad estructurada de que acciones o eventos humanos conduzcan a resultados no deseados que afecten entidades de valor. Se fundamenta en calcular la probabilidad de que ocurra un evento adverso y el impacto negativo que este tendría [3].
+* *Mitigación:* Enfoque proactivo centrado en gestionar el comportamiento del software para limitar daños, proporcionar continuidad y prevenir accesos o modificaciones no autorizadas, reduciendo así el riesgo [4].
 
 == Fundamentos de Modelado de Amenazas
 
+El modelado de amenazas es un proceso estructurado utilizado para identificar, analizar y comprender los vectores de riesgo que pueden afectar a un sistema o aplicación. Su propósito principal es evaluar riesgos de seguridad de manera anticipada y definir contramedidas de diseño antes de la etapa de implementación [5].
+
 === El Manifiesto de Modelado de Amenazas
-Todo proceso efectivo de modelado de amenazas debe centrarse en responder a las siguientes cuatro preguntas fundamentales:
-1. ¿En qué estamos trabajando? (Análisis del sistema y la arquitectura).
-2. ¿Qué puede salir mal? (Identificación de amenazas y vulnerabilidades).
-3. ¿Qué vamos a hacer al respecto? (Definición de mitigaciones y controles).
-4. ¿Hicimos un buen trabajo? (Validación, auditoría y retrospectiva).
+Para que el modelado de amenazas no se convierta en un ejercicio conceptual abstracto, debe ser guiado por un proceso. El marco metodológico de Shostack, adoptado por OWASP, estructura esta actividad en cuatro preguntas fundamentales que el equipo de diseño debe responder iterativamente [6]:
+
+1. *¿En qué estamos trabajando?*
+El punto de partida exige delimitar el alcance del modelo. Los arquitectos y el equipo técnico deben comprender la topología del sistema. Para responder a esta pregunta, se generan entradas como diagramas de arquitectura, diagramas de flujo de datos (DFD) o clasificaciones de datos, las cuales definen las fronteras de confianza del sistema.
+2. *¿Qué puede salir mal?*
+Constituye la fase de investigación activa para descubrir las amenazas aplicables al sistema modelado. Dado que una discusión abierta puede carecer de foco, se requiere utilizar metodologías estructuradas (como STRIDE, LINDDUN, PASTA o CAPEC) que obliguen a los diseñadores a evaluar sistemáticamente la superficie de ataque y los vectores de vulnerabilidad.
+3. *¿Qué vamos a hacer al respecto?*
+En esta etapa, los hallazgos técnicos se traducen en acciones arquitectónicas específicas. Para cada amenaza identificada, el diseñador debe evaluar y aplicar una estrategia de remediación adecuada: Transferir, Evitar, Mitigar o Eliminar el riesgo. Aquí es donde se justifican y aplican los artefactos de diseño seguro.
+4. *¿Hicimos un trabajo lo suficientemente bueno?*
+La fase de cierre. Consiste en una actividad retrospectiva en la que se audita el trabajo realizado para verificar la calidad, la viabilidad de las soluciones propuestas y confirmar que las mitigaciones no hayan introducido nuevas vulnerabilidades al sistema.
 
 === El Modelo STRIDE
-Marco de referencia utilizado para identificar amenazas categorizadas en: *S*poofing (Suplantación), *T*ampering (Manipulación), *R*epudiation (Repudio), *I*nformation Disclosure (Fuga de Información), *D*enial of Service (Denegación de Servicio) y *E*levation of Privilege (Elevación de Privilegios).
+Desarrollado originalmente por Microsoft y adoptado ampliamente en la industria, STRIDE es un marco de referencia maduro para el modelado de amenazas. Su función es proporcionar una estructura mental que permita a los arquitectos pensar como un atacante y categorizar los fallos de seguridad potenciales [6]. 
 
-=== Matriz de Selección de Artefactos
-La siguiente tabla indica qué artefacto utilizar según la categoría STRIDE a mitigar o descubrir.
+Las categorías de STRIDE y las propiedades de seguridad que buscan vulnerar son:
+
+* *S - Spoofing (Suplantación de identidad):* Acción maliciosa orientada a hacerse pasar por una entidad, usuario o sistema distinto para obtener acceso no autorizado a los recursos. Afecta directamente la propiedad de autenticación.
+* *T - Tampering (Manipulación):* Modificación maliciosa y no autorizada de datos, ya sea en tránsito a través de la red o en reposo (bases de datos), alterando la integridad de la información.
+* *R - Repudiation (Repudio):* Capacidad de un usuario o atacante de negar haber realizado una acción en el sistema debido a la falta de capacidad del sistema para demostrar lo contrario. Vulneración del no repudio.
+* *I - Information Disclosure (Divulgación de información):* Fuga o acceso no autorizado a datos confidenciales, originada por espionaje de redes o fallos de protección de acceso. Compromete directamente la Confidencialidad.
+* *D - Denial of Service (Denegación de Servicio):* Intento de degradar, saturar o impedir que un sistema, recurso o red esté disponible para sus usuarios legítimos. Afecta la disponibilidad.
+* *E - Elevation of Privilege (Elevación de Privilegios):* Explotación de un fallo que permite a un atacante obtener permisos de acceso superiores a los concedidos, facilitando la ejecución de acciones no autorizadas. Afecta directamente la autorización.
+
+
+=== Matriz de selección de artefactos
+La siguiente tabla indica qué artefacto gráfico es el más adecuado para identificar, analizar o diseñar mitigaciones según la categoría de amenaza STRIDE que se desea abordar en el sistema.
 
 [cols="3,1,1,1,1,1,1", options="header"]
 |===
@@ -44,209 +86,166 @@ La siguiente tabla indica qué artefacto utilizar según la categoría STRIDE a 
 | Misuse / Abuse Case | X | X | X | X | X | X
 |===
 
-== Catálogo de Artefactos
+= Listado de artefactos
 
-// Nota: Los artefactos se presentan en estricto orden alfabético.
+== Attack Tree - Árbol de Ataque
 
-// =============================================================================
-// ARTEFACTO 3.1: ATTACK TREE
-// =============================================================================
+=== Propósito y contexto
+El Attack Tree es un modelo conceptual basado en grafos que proporciona una representación visual, estructurada y metódica de los diferentes caminos que un atacante puede seguir para vulnerar un sistema. Concebido originalmente como una adaptación de los árboles de fallos (véase más adelante _Fault Trees_) de la ingeniería de confiabilidad, este artefacto traduce un objetivo hostil abstracto en el nodo raíz y lo descompone jerárquicamente en subobjetivos hasta llegar a acciones atómicas elementales en los nodos hoja.
 
-=== 3.1. Attack Tree (Árbol de Ataque)
+Dentro del diseño de software, funciona como una herramienta analítica y de comunicación. Permite a los diseñadores pensar desde la perspectiva del adversario, evaluar la viabilidad de distintas rutas de ataque basándose en atributos como el costo, dificultad o probabilidad, e identificar con precisión en qué puntos de la arquitectura es más efectivo implementar controles y contramedidas.
 
-==== 3.1.1. Contexto y propósito 
-El *Attack Tree* (Árbol de Ataque) es un modelo conceptual y formal basado en grafos acíclicos dirigidos (DAG) que proporciona una descomposición sistemática, jerárquica y deductiva de los caminos potenciales mediante los cuales un adversario explota vulnerabilidades para vulnerar un sistema. Concebido formalmente en la literatura técnica por Bruce Schneier en 1999 como una evolución directa de los árboles de fallos (*Fault Trees*) de ingeniería de confiabilidad y de los *Threat Logic Trees*, el artefacto traduce metas abstractas de alto nivel en combinaciones de eventos atómicos cuantificables denominados *Basic Attack Steps* (BAS).
+=== Contextos metodológicos y estándares asociados
+La adopción de este artefacto no ocurre de forma aislada; la literatura demuestra que su eficacia radica en su integración con marcos y normativas consolidadas:
 
-Dentro de la arquitectura de software seguro, un árbol de ataque trasciende la simple ilustración estática:
-- **Semántica Formal y Descomposición:** Cada nodo representa una meta o submeta del adversario, estructurado formalmente como un álgebra de términos sobre un semirregistro idempotente distributivo. Las ramificaciones definen composiciones disyuntivas (*OR*, donde basta completar una alternativa) o conjuntivas (*AND*, donde deben satisfacerse todos los prerrequisitos hijos de forma complementaria).
-- **Evaluación de Atributos (Bottom-Up):** Asigna valores a los nodos hoja (ej. costo monetario, tiempo de ejecución, probabilidad estocástica, requerimiento de equipo especial) y los sintetiza recursivamente hacia la raíz siguiendo las propiedades operacionales del dominio de atributos.
-- **Análisis "What-If" y Toma de Decisiones:** Permite al arquitecto alterar valores paramétricos simulando la introducción de contramedidas o el incremento de barreras técnicas, observando el impacto matemático directo en el nodo raíz y podando (*pruning*) las rutas inviables para perfiles de atacantes específicos.
-- **Captura y Reutilización de Conocimiento:** Funciona como un componente modular donde árboles completos (ej. vulneración de autenticación PGP o forzado físico) pueden acoplarse como subárboles dentro de modelos arquitectónicos de mayor escala.
+* *Marcos de modelado de amenazas:* Integración directa con metodologías como STRIDE para categorizar vulnerabilidades, así como el uso de bases de conocimiento estandarizadas como CAPEC y la matriz MITRE ATT&CK [EP-25, EP-38].
+* *Ingeniería basada en modelos:* Su generación y análisis se incorporan en metodologías formales como MBSEsec y UMLsec para evaluar la seguridad directamente desde los modelos arquitectónicos del sistema [EP-21, EP-26].
+* *Bases de conocimiento específicas:* Apoyo en marcos como Misuse Activities (MUA) y Mobile Application Security Testing (MAST) para la identificación estructurada de amenazas [EP-07].
 
-*Alineación con el Modelo STRIDE:*
-La evidencia empírica demuestra que el Attack Tree se alinea directamente con la taxonomía STRIDE al derivar sistemáticamente las condiciones que vulneran los objetivos de diseño:
-- *Tampering (Manipulación):* Desglose minucioso de inyecciones de código (SQLi, manipulación de memoria, alteración de firmware de sensores IoT).
-- *Elevation of Privilege (Elevación de Privilegios):* Modelado de escalada horizontal y vertical mediante secuencias de explotación de credenciales y derivación de tokens.
-- *Spoofing (Suplantación):* Identificación de rutas de captura, robo o adivinación de credenciales (phishing, recolección de hashes, intercepción de sesiones).
-- *Denial of Service (DoS):* Análisis de saturación de capas de transporte, enlace o aplicaciones en arquitecturas ciberfísicas y redes industriales.
+=== Dominios de aplicación y de software
+El artefacto demuestra una alta versatilidad, aplicándose en arquitecturas donde las fallas de seguridad tienen impactos críticos:
 
-==== 3.1.2. Contextos Metodológicos y Estándares Asociados
-La adopción del Attack Tree en la ingeniería de software se sustenta en marcos formales y estándares consolidados:
-- *Modelado de Amenazas Arquitectónico:* Guía metodológica del NCSC (*National Cyber Security Centre*), OWASP Threat Modeling Framework y LINDDUN (como formalismo de soporte a árboles de amenazas)
-- *Ingeniería Basada en Modelos (MBSE / MDE):* Integración directa mediante metodologías como *MBSEsec* y *UMLsec*, permitiendo sintetizar árboles a partir de especificaciones formales como AADL (*Architecture Analysis & Design Language*) mediante herramientas de traducción automatizada como TAMSAT y evaluación de riesgo con SMART
-- *Seguridad Ciberfísica e Industrial:* Cumplimiento de normativas críticas en automoción (ISO 21434, ISO 26262) y análisis de sistemas SCADA/OT donde la seguridad lógica (*security*) converge con la seguridad funcional (*safety*)
-- *Bases de Conocimiento Estructuradas:* Correspondencia entre nodos hoja y catálogos estandarizados de vulnerabilidades y debilidades de MITRE (CAPEC y CWE)
-
-==== 3.1.3. Dominios de Aplicación Tecnológica
-El artefacto demuestra validez comprobada en diversas escalas arquitectónicas:
-- *Sistemas Ciberfísicos (CPS) e Internet de las Cosas (IoT):* Modelado de intrusiones en cerraduras electrónicas inteligentes (ej. Amazon Key), plataformas médicas inteligentes como IGMIAS y redes de telemetría de Smart Hospitals frente a ataques dirigidos de inyección SQL y propagación lateral de malware.
-- *Sistemas de Identidad y Repositorios de Credenciales Distribuidas:* Infraestructuras de red y Grid Computing, destacando el análisis formal del subsistema de certificados *MyProxy* en Globus Toolkit
-- *Sistemas Financieros y Transaccionales:* Evaluación de fraude en cajeros automáticos (ATM Fraud) combinando vectores de ingeniería social, robo físico de plásticos, clonación (*skimming*) y software de intrusión en el dispensador.
+* *Sistemas ciberfísicos (CPS) e IoT:* Evaluación de riesgos en infraestructuras interconectadas, desde hogares inteligentes hasta monitores médicos, donde las vulnerabilidades lógicas derivan en daños físicos [EP-26, EP-35].
+* *Sector automotriz y vehicular:* Modelado de seguridad en vehículos modulares e interconectados, evaluando múltiples combinaciones de ciberseguridad ante reconfiguraciones constantes [EP-21].
+* *Redes y sistemas críticos:* Análisis de amenazas en Redes Definidas por Software (SDN) y protección de infraestructuras críticas como sistemas de alerta temprana [EP-07, EP-25].
+* *Aplicaciones web:* Mitigación de inyecciones de código e intercepción de datos en etapas tempranas del ciclo de vida del desarrollo [EP-22].
 
 [WARNING]
 ====
-*Retos, Advertencias y Limitaciones (Principio Fail Fast)*
+*Retos y limitaciones del artefacto*
 
-El diseñador debe conocer las restricciones técnicas del artefacto antes de comprometer esfuerzo en su construcción:
+Antes de comprometer recursos en la construcción de un árbol de ataque, el diseñador debe considerar los siguientes desafíos y limitantes reportadas en la industria:
 
-- *Explosión Combinatoria y Pérdida de Comprensibilidad:* En sistemas extensos, la descomposición recursiva manual deriva en grafos desproporcionados (efecto *hairball*). La literatura advierte que los árboles diseñados manualmente rara vez superan los 100 nodos sin volverse incomprensibles para los humanos si no intervienen herramientas de abstracción o poda matemática.
-- *El Problema de los Clones (Nodos Repetidos):* Cuando un mismo paso de ataque atómico o credencial contribuye a múltiples ramas disyuntivas o conjuntivas (acciones clonadas), la evaluación ascendente clásica (*Bottom-Up*) falla matemáticamente al duplicar costos o distorsionar probabilidades. Resolverlo exige reformular el árbol como un Grafo Acíclico Dirigido (DAG) y recurrir a algoritmos de evaluación repetida o semántica de conjuntos (*Set Semantics*).
-- *Incertidumbre y Subjetividad de Atributos:* Asignar valores estocásticos o financieros precisos a las hojas suele ser poco realista en fases tempranas de diseño. La literatura demuestra que las métricas de atacantes son inherentemente subjetivas y que datos históricos precisos rara vez están disponibles a nivel granular de exploits.
-- *Ausencia de Dependencias Temporales Nativas:* La semántica básica AND/OR carece de mecanismos para modelar secuencias estrictas en el tiempo (ej. ejecutar *Paso 1* obligatoriamente antes de *Paso 2*), requiriendo extensiones no estandarizadas como compuertas secuenciales SAND (*Sequential AND*).
-- *Naturaleza Unidireccional:* Modela exclusivamente las tácticas ofensivas, ignorando cómo las defensas mitigan dinámicamente cada paso intermedio, a menos que se extienda formalmente a un *Attack-Defense Tree*.
+* *Alta complejidad de modelado:* Trazar todos los vectores posibles resulta cognitivamente demandante. En sistemas extensos, el modelo puede crecer desproporcionadamente, requiriendo herramientas de visualización interactiva para mantener su legibilidad.
+* *Dependencia de expertos:* Construir un modelo exhaustivo exige habilidades de análisis y un conocimiento profundo del dominio (bases de vulnerabilidades, tácticas de adversarios) que el desarrollador promedio no suele poseer de forma nativa [EP-15, EP-26].
+* *Subjetividad en atributos:* Asignar valores precisos (como la probabilidad de éxito o el costo exacto de un ataque) a los nodos hoja es un reto. Los datos históricos estadísticos suelen ser escasos, lo que introduce un nivel de incertidumbre en las evaluaciones [EP-26].
+* *Cobertura incompleta:* El árbol modela lo que el analista conoce. Vulnerabilidades de día cero o vectores no documentados quedarán fuera del modelo, por lo que nunca debe asumirse que el sistema es 100% seguro [EP-35].
 ====
 
 [IMPORTANT]
 ====
-*Prerrequisitos de Diseño*
+*Prerrequisitos de diseño*
 
-Para construir un árbol de ataque sólido y no un diagrama especulativo, el analista debe contar previamente con:
-1. *Definición Explícita de la Meta Raíz:* Identificación precisa del activo de información de alto valor o el impacto que se busca evitar (ej. *"Exfiltrar base de datos clínica de pacientes"* o *"Robar fondos de cajero automático"*), evitando raíces ambiguas.
-2. *Límites de Confianza y Superficie de Ataque:* Diagrama de Flujo de Datos (DFD) o diagrama de arquitectura que exponga claramente las fronteras de red, protocolos de comunicación, puntos de entrada públicos e interfaces expuestas.
-3. *Definición de Perfiles de Amenaza:* Comprensión del nivel de habilidad técnica, presupuesto y acceso físico del adversario asumido (ej. atacante casual / *script-kiddie*, personal interno malicioso o amenazas persistentes avanzadas).
+Para que el diagrama sea útil en la práctica y no se base únicamente en suposiciones, el equipo debe definir previamente:
+
+1. *El objetivo del atacante:* Tener mucha claridad sobre el activo crítico a proteger (ej. "Robar credenciales de usuario" o "Saturar el servidor web").
+2. *Superficie de ataque:* Comprensión topológica del sistema (idealmente a través de un DFD) para conocer los límites de confianza y los puntos de entrada expuestos.
+3. *Perfil del adversario:* Determinar si se evalúa a un atacante casual, un empleado interno malicioso o una amenaza persistente avanzada (APT), ya que esto dictará qué rutas del árbol son viables.
 ====
 
-==== 3.1.4. Sintaxis Visual Oficial (Cómo se Dibuja)
+=== Sintaxis visual oficial
 
-La notación formal del Attack Tree está estandarizada en la literatura técnica y en herramientas formales (ADTool, SecurITree) bajo las siguientes reglas estructurales y geométricas:
+_Nota: La notación gráfica de los árboles de ataque no cuenta con un estándar universal único; las formas pueden variar según la herramienta de software utilizada._
+
+[cols="1,1,3", options="header"]
+|===
+| Elemento | Representación Visual | Regla Semántica
+
+| *Nodo raíz (Meta)*
+
+| image::images/icon_root.png[Nodo Raíz, width=40, align="center"]
+
+| Ubicado en la cúspide. Representa el objetivo final del adversario. Solo debe existir un nodo raíz por árbol.
+
+| *Compuerta OR*
+| image::images/icon_or.png[Compuerta OR, width=40, align="center"]
+| Ramas independientes. El objetivo padre se alcanza si el atacante completa al menos uno de los subobjetivos hijos.
+
+| *Compuerta AND*
+| image::images/icon_and.png[Compuerta AND, width=40, align="center"]
+| Prerrequisitos complementarios. El atacante está obligado a completar *todos* los subobjetivos hijos (usualmente indicados con un arco que une las líneas) para alcanzar el nodo padre.
+
+| *Nodos hoja (BAS)*
+| image::images/icon_leaf.png[Nodo Hoja, width=40, align="center"]
+| Representan los *Basic Attack Steps*. Son acciones atómicas ejecutables que no requieren mayor desglose. Aquí se asignan los valores de evaluación (costo, viabilidad, etc.).
+
+| *Nodos clonados*
+| image::images/icon_clone.png[Clones, width=40, align="center"]
+| Una misma acción atómica (ej. robar teléfono) que satisface múltiples ramas a la vez. Convierte el árbol en un Grafo Acíclico Dirigido (DAG) para evitar duplicar esfuerzos en el análisis.
+|===
+
+=== Guía de construcción paso a paso
+
+El diseño de un árbol de ataque sigue un proceso iterativo de refinamiento descendente, finalizando con un análisis ascendente:
+
+. *Definir el nodo raíz:* Identificar el objetivo principal desde la perspectiva del atacante. Este debe ser un objetivo accionable y específico (ej. "Vulnerar servidor de base de datos").
+. *Identificar rutas de acceso (sub-metas):* Desglosar el objetivo principal en los enfoques generales que el atacante podría tomar (ej. ataque de red, ataque físico, ingeniería social).
+. *Estructurar la lógica (AND / OR):* Para cada ruta, determinar las dependencias:
+  * Si el atacante tiene varias alternativas independientes para lograr el paso, conectarlas como ramas disyuntivas (*OR*).
+  * Si el atacante requiere completar múltiples pasos obligatorios en conjunto, conectarlas como ramas conjuntivas (*AND*).
+. *Refinar hasta nodos hoja:* Continuar subdividiendo los enfoques hasta alcanzar acciones atómicas observables (técnicas de explotación específicas, robo físico, phishing) que ya no necesiten desglose.
+. *Asignar atributos a las hojas:* Evaluar los nodos terminales asignando métricas según el perfil del atacante (ej. Nivel de habilidad técnica requerida, costo monetario, equipo especial necesario, probabilidad de éxito).
+. *Evaluar y priorizar:* Analizar el árbol desde las hojas hacia la raíz para descubrir la ruta de menor resistencia (ej. el ataque más barato o el más probable). 
+. *Integrar contramedidas:* Identificar en qué nodos críticos se pueden insertar defensas arquitectónicas para romper las rutas conjuntas (AND) o elevar el costo/dificultad de las rutas disyuntivas (OR) más viables.
+
+=== Ejemplo de caso de estudio aplicado
+
+_Caso de Estudio: Obtención de contraseña de usuario en aplicaciones de software_
+
+El siguiente diagrama ilustra un árbol de ataque enfocado en un escenario universal para sistemas de software: el compromiso de las credenciales de un usuario. 
+
+image::images/ex_at.webp[Árbol de Ataque - Obtener contraseña de usuario, align="center"]
+
+*Análisis del Escenario:*
+
+* *Meta raíz:* El objetivo principal del atacante es "Obtener la contraseña del usuario".
+* *Descomposición disyuntiva (OR):* Para lograrlo, el atacante evalúa cinco rutas principales independientes: adivinar la contraseña (fuerza bruta), lograr que el usuario la revele, extraerla de otro servicio, obtenerla mediante vigilancia física/lógica, o extraerla directamente del servicio objetivo.
+* *Refinamiento de rutas críticas:*
+  ** Si el atacante opta por "Hacer que el usuario revele la contraseña", el árbol presenta ramificaciones de ingeniería social: ataques en línea (phishing), en persona, o mediante coerción física.
+  ** Si opta por la "Vigilancia", se despliegan acciones técnicas como comprometer el dispositivo remotamente para instalar un _keylogger_, o acceder físicamente al entorno del usuario.
+  ** Si el atacante decide ir por la infraestructura ("Obtener del servicio objetivo"), debe comprometer la base de datos de recuperación o abusar de la función de reseteo de contraseñas.
+* *Toma de decisiones:* Al evaluar este árbol, el equipo de diseño puede notar que invertir excesivamente en cifrar la base de datos local no detendrá al atacante si la ruta de _phishing_ (Ingeniería social en línea) requiere menor esfuerzo técnico y costo. Esto justifica la implementación de contramedidas cruzadas, como la Autenticación Multifactor (MFA), que neutraliza múltiples ramas disyuntivas simultáneamente al hacer que la simple obtención de la contraseña sea insuficiente.
+
+=== Herramientas de software recomendadas
+
+Para gestionar la escalabilidad y aplicar análisis cualitativos o cuantitativos, se recomienda trascender el dibujo manual mediante las siguientes herramientas:
+
+* *Devici / IriusRisk / SecurITree:* Plataformas comerciales especializadas en modelado continuo de amenazas que permiten definir perfiles de atacantes, evaluar recursos y eliminar automáticamente rutas de ataque irrelevantes o inviables.
+* *Cytoscape / GraphViz:* Bibliotecas de visualización de grafos (Diagrams-as-Code) que permiten renderizar programáticamente estructuras complejas mediante notación DOT, ideales para integrar árboles en repositorios de código.
+* *OWASP Threat Dragon / Microsoft Threat Modeling Tool:* Herramientas gratuitas orientadas a desarrolladores para generar modelos tempranos de amenazas.
+
+=== Checklist de verificación y auditoría
+
+Audite el árbol de ataque respondiendo a los siguientes criterios binarios antes de dar por finalizada la fase de modelado:
 
 [cols="1,2,2", options="header"]
 |===
-| Elemento Visual | Notación Gráfica y Simbología | Regla Semántica Estricta
+| Rubro evaluado | Logrado | No Logrado
 
-| *Nodo Raíz (Meta Global)*
-| Rectángulo o elipse (típicamente demarcado en rojo en herramientas formales) ubicado en la cúspide jerárquica del modelo.
-| Solo puede existir un único nodo raíz activo por árbol o subescenario evaluado. Representa el estado final de compromiso alcanzado por el adversario
+| *Enfoque del objetivo*
+| El árbol posee un único nodo raíz claramente definido como un estado de compromiso u objetivo hostil específico.
+| El árbol presenta múltiples nodos raíz desconectados o el objetivo es ambiguo (ej. "Falla del sistema" en lugar de "Robo de base de datos").
 
-| *Compuerta OR (Refinamiento Disyuntivo)*
-| Aristas directas simples que conectan el nodo padre con sus hijos, sin ningún símbolo adicional de cruce. (En algunas notaciones de ingeniería se rotula explícitamente "OR" en el conector)
-| Refleja *alternativas independientes*. La meta del nodo padre se alcanza si *al menos uno* de los subobjetivos hijos se concreta con éxito. En síntesis matemática, un nodo OR adopta el valor de la ruta más barata (min) o más probable (max).
+| *Coherencia lógica (AND/OR)*
+| La diferencia entre alternativas independientes (OR) y pasos secuenciales obligatorios (AND) está gráficamente clara y lógicamente justificada.
+| Se etiquetan pasos obligatorios como alternativas, asumiendo que el atacante logra la meta sin completar la cadena necesaria.
 
-| *Compuerta AND (Refinamiento Conjuntivo)*
-| Un arco curvo continuo que une y atraviesa transversalmente todas las líneas descendentes que conectan al padre con sus nodos hijos.
-| Refleja *prerrequisitos complementarios obligatorios*. El atacante debe lograr *todos* los subobjetivos hijos para consumar la meta padre. En síntesis matemática, su costo corresponde a la suma de los hijos y su probabilidad al producto acumulado.
+| *Atomicidad de las hojas (BAS)*
+| Los nodos terminales representan acciones técnicas o físicas ejecutables y evaluables directamente.
+| Los nodos hoja siguen siendo conceptos abstractos que no indican cómo se ejecuta el ataque.
 
-| *Compuerta SAND (Refinamiento Secuencial)*
-| Un arco curvo que une las aristas acompañado de una flecha direccional que indica el orden de izquierda a derecha.
-| Variante formalizada por Mauw, Jhawar et al. Exige que todas las acciones hijas se completen, pero respetando un orden temporal estricto (ej. autenticarse antes de inyectar comandos).
-
-| *Nodos Hoja (BAS - Acciones Atómicas)*
-| Nodos terminales (rectángulos o elipses sin descendencia).
-| Representan vectores de ataque elementales que no requieren mayor refinamiento analítico. Son los únicos elementos a los que se les asignan directamente valores empíricos o de atributos.
-
-| *Acciones Clonadas (Clones en DAG)*
-| Múltiples referencias a un mismo nodo compartiendo idéntica etiqueta atómica dentro del grafo.
-| Representan una misma instancia física o técnica que satisface múltiples metas simultáneas (ej. una campaña de phishing que otorga usuario y contraseña al mismo tiempo). Gráficamente deben fusionarse en un Grafo Acíclico Dirigido.
+| *Ausencia de ciclos (Aciclicidad)*
+| El diagrama fluye en una sola dirección hacia la meta, estructurándose como un Grafo Acíclico Dirigido (DAG).
+| Existen bucles donde un paso de ataque requiere la finalización de un paso superior, creando un ciclo infinito.
 |===
 
-==== 3.1.5. Guía de Construcción Paso a Paso (Algoritmo Metodológico)
+=== Recursos y lecturas recomendadas
+* *Artículo seminal:* Schneier, B. (1999). _Attack Trees: Modeling security threats_. Dr. Dobb's Journal.
+* *Guías técnicas de la industria:* NCSC UK. _Using attack trees to understand cyber security risk_. National Cyber Security Centre.
+* *Metodologías prácticas:* DevSecOps. _Guide to Threat Modeling using Attack Trees_.
+* *Video tutorial:* _Attack Tree Analysis: How to use ir for Threat Modeling. https://www.youtube.com/watch?v=2nxPm_1lS0g_.
 
-La construcción rigurosa de un árbol de ataque se ejecuta mediante un ciclo estructurado de refinamiento recursivo (*top-down*), complementado por una propagación paramétrica (*bottom-up*):
 
-. **Paso 1: Delimitación de la Meta Raíz (Attacker's Goal):**
-   * Establecer una proposición concisa del objetivo hostil desde la mentalidad del atacante (ej. *"Comprometer repositorio de credenciales MyProxy"* o *"Abrir bóveda de seguridad"*). Este nodo se fija en la cúspide del lienzo.
-. **Paso 2: Identificación de Superficies de Acceso Directas (Nivel 1):**
-   * Descomponer la raíz en las rutas arquitectónicas generales de aproximación. En sistemas de software, estas submetas se mapean típicamente a los vectores de entrada principales: explotación de red, vulneración web/API, compromiso de almacenamiento o ingeniería social.
-. **Paso 3: Determinación Estricta de Dependencias Lógicas (AND vs. OR):**
-   * Para cada submeta, el arquitecto evalúa la necesidad operativa:
-     * Si las opciones son sustitutos viables entre sí, se trazan como ramas disyuntivas (*OR*, sin arco)
-     * Si el compromiso exige obligatoriamente la concurrencia de varios eventos técnicos (ej. obtener una cookie Y falsificar un encabezado), se enlazan mediante un arco continuo (*AND*).
-. **Paso 4: Refinamiento Recursivo hasta Hojas Atómicas:**
-   * Continuar desglosando cada subrama hacia abajo. 
-   * **Criterio de parada (Regla del NCSC):** El refinamiento culmina cuando el nodo representa un paso operacional atómico (*Basic Attack Step*) que corresponde a una vulnerabilidad técnica conocida (CWE), un comando ejecutable, un vector físico o una técnica observable de red (ej. inyección SQL, intercepción ARP, fuerza bruta con diccionario) sin dependencias inferiores.
-. **Paso 5: Identificación y Fusión de Clones en DAG:**
-   * Detectar si una misma acción atómica se repite en distintas ramas del árbol. Fusionar los nodos redundantes compartiendo una misma entidad lógica para evitar incongruencias de cálculo.
-. **Paso 6: Decoración y Asignación de Atributos:**
-   * Asignar valores a los nodos hoja terminales. Pueden emplearse valores booleanos (*Posible/Imposible*, *Equipo especial requerido: Sí/No*) o métricas cuantitativas continuas extraídas de análisis de laboratorio o bases de riesgo (*Costo del ataque en USD*, *Probabilidad de éxito [0,1]*, *Tiempo en horas*).
-. **Paso 7: Propagación Ascendente y Evaluación Matemática:**
-   * Sintetizar el valor del nodo raíz aplicando las reglas formales de la semántica de atributos de Schneier y Mauw & Oostdijk:
-[cols="1,2,2", options="header"]
-|===
-| Métrica / Atributo | Operador en Compuerta OR | Operador en Compuerta AND
-| *Costo Financiero de Ataque* | min(C_1, C_2, ..., C_n) | Suma(C_1 + C_2 + ... + C_n)
-| *Probabilidad de Éxito* | max(P_1, P_2, ..., P_n) | Producto(P_1 * P_2 * ... * P_n)
-| *Tiempo Mínimo de Ejecución* | min(T_1, T_2, ..., T_n) | Suma(T_1 + T_2 + ... + T_n) (o max en paralelismo)
-| *Habilidad Requerida* | min(Skill_1, ..., Skill_n) | max(Skill_1, ..., Skill_n)
-|===
-. **Paso 8: Simulación de Contramedidas y Poda ("What-If"):**
-   * Identificar la ruta crítica más probable o de menor costo para el adversario. Simular la implementación de un control de seguridad arquitectónico alterando el valor de la hoja correspondiente (ej. elevando su costo de explotación al infinito) y recalculando el impacto en el nodo raíz para justificar el retorno de inversión en seguridad.
+== Referencias (esto irá al final del catálogo)
 
-==== 3.1.6. Laboratorio: Caso de Estudio Aplicado
+[1] S. Rehman y K. Mustafa, "Research on software design level security vulnerabilities", ACM SIGSOFT Software Engineering Notes, vol. 34, no. 6, pp. 1–5, 2009. https://doi.org/10.1145/1640162.1640171
 
-_Caso de Estudio: Compromiso de Repositorio de Credenciales MyProxy (Grid Computing) y Fraude en Cajeros Automáticos (ATM)_
+[2] R. Derbyshire, B. Green, D. Prince, A. Mauthe, y D. Hutchison, "An Analysis of Cyber Security Attack Taxonomies", Proceedings - 3rd IEEE European Symposium on Security and Privacy Workshops, EURO S and PW 2018, pp. 153–161, 2018. https://doi.org/10.1109/EuroSPW.2018.00028
 
-Para validar la operatividad del modelo en arquitecturas complejas de software e infraestructuras críticas, se analiza la subestructura de ataque al portal web del servicio *MyProxy* en Globus Toolkit (Saini et al., 2008) combinada con el modelo estocástico de fraude en cajeros automáticos (Buldas et al., 2019):
+[3] CyBOK, The Cyber Security Body of Knowledge. 2021.
 
-image::images/myproxy_tree.png[Árbol de Ataque - Caso de Estudio MyProxy y ATM, align="center"]
+[4] H. Washizaki (Ed.), Guide to the Software Engineering Body of Knowledge (SWEBOK Guide) Version 4.0 (4th ed.), IEEE Computer Society, 2024.
 
-*Análisis del Escenario de Software (MyProxy Web Portal):*
-- **Meta Raíz:** *"Vulnerar la seguridad del repositorio MyProxy"*.
-- **Descomposición:** El adversario evalúa cuatro vectores disyuntivos (OR): atacar el repositorio de almacenamiento, interceptar canales de transmisión, vulnerar los certificados x.509 o atacar el portal web.
-- **Ruta Crítica en Portal Web:** Al centrarse en *"Atacar Web Portal"*, se descompone en comprometer el almacenamiento de certificados o romper la sesión de transmisión. Para *"Obtener Acceso Root en Almacenamiento"*, se requiere un ataque conjuntivo (AND): comprometer la llave maestra Y vulnerar el sistema operativo base.
-- **Evaluación de Atributos de Ataque:**
-[cols="2,2,2,2", options="header"]
-|===
-| Escenario de Ataque Modelado | Vector Técnico (BAS) | Costo para el Atacante (USD) | Costo de Daño al Negocio (USD)
-| *Escenario 1 (Ruta Mínima)* | Ingeniería Social + Obtención de Credencial Root | $7,600 | $17,500
-| *Escenario 2* | Soborno + Credencial Root | $8,500 | $17,500
-| *Escenario 3* | Fuerza Bruta directa al canal web | $15,000 | $10,000
-| *Escenario 4 (Máximo Esfuerzo)* | Fuerza Bruta combinada + Elevación Root | $22,500 | $25,000
-|===
-- **Conclusión Arquitectónica:** El análisis del árbol revela que fortalecer el cifrado o alargar las llaves criptográficas (ataque 3, $15,000 USD) ofrece un retorno de defensa marginal, ya que el adversario preferirá explotar la ingeniería social y las fallas de sanitización del portal web (ataque 1, $7,600 USD). El árbol orienta el presupuesto de diseño hacia mecanismos de autenticación multifactor (MFA) y sanitización estricta de parámetros.
+[5] OWASP, "Thread Modeling", 2025. [Online]. Disponible en: https://owasp.org/www-community/Threat_Modeling
 
-==== 3.1.7. Herramientas de Software Recomendadas
-
-Para trascender la diagramación manual en papel y habilitar la simulación cuantitativa formal, se recomiendan las siguientes herramientas:
-- *ADTool / ADTool 2.0 (Universidad de Luxemburgo):* Entorno académico formal de código abierto diseñado específicamente para el diseño y cálculo cuantitativo ascendente de árboles de ataque y árboles de ataque-defensa mediante semántica de semirregistros y operadores personalizados.
-- *SecurITree (Amenaza Technologies):* Solución industrial de modelado de amenazas basada en capacidades de adversarios. Permite asignar perfiles de atacantes, evaluar recursos y realizar poda algorítmica (*pruning*) de rutas inviables.
-- *ATSYRA Studio / OSEAD:* Suites especializadas en modelado formal, extracción de estrategias óptimas y verificación de correctez de árboles mediante sistemas de transición y *model checking*.
-- *Graphviz (DOT Language) / Cytoscape:* Bibliotecas de diagramación basadas en código (*Diagrams-as-Code*). Graphviz optimiza el trazado de grafos acíclicos dirigidos estáticos sin solapamiento de aristas; Cytoscape permite exploración interactiva y colapso dinámico de nodos en árboles que superan los 60 elementos.
-
-==== 3.1.8. Checklist de Verificación y Auditoría (Criterio de Correctez)
-
-Para comprobar que el diagrama fue construido con rigor metodológico y es formalmente correcto antes de pasar a la fase de implementación, el evaluador o estudiante debe auditar su modelo respondiendo a los siguientes criterios binarios:
-
-[cols="1,2,2,2", options="header"]
-|===
-| Rubro Evaluado | Criterio de Verificación | Logrado (Condición Correcta) | No Logrado (Deficiencia Detectada)
-
-| *Sintaxis y Notación (25%)*
-| Diferenciación de compuertas lógicas y directrices de conexión.
-| Todas las compuertas conjuntivas (AND) están claramente identificadas mediante arcos transversales continuos; las disyunciones (OR) usan líneas directas simples sin adornos.
-| Uso ambiguo de conectores sin arcos ni etiquetas, forzando al lector a adivinar la relación lógica entre submetas.
-
-| *Topología del Grafo (25%)*
-| Integridad estructural y aciclicidad.
-| El árbol presenta una única raíz superior, fluye unidireccionalmente de arriba a abajo y carece de ciclos lógicos cerrados (cumple la regla formal de DAG)
-| Presencia de lazos o nodos hijos que apuntan de regreso a nodos ancestros; múltiples raíces inconexas en el mismo grafo
-
-| *Nivel de Abstracción en Hojas (25%)*
-| Atomicidad técnica de los nodos terminales (BAS).
-| Todos los nodos hoja representan acciones técnicas elementales y observables en el sistema (ej. inyección de payload, robo de cookie, fuerza bruta) que no requieren subdivisión
-| Existen hojas que siguen siendo metas abstractas de alto nivel (ej. *"Romper la seguridad del servidor"*, *"Hacer trampa"*) sin vector técnico observable
-
-| *Consistencia Cuantitativa (25%)*
-| Sintaxis de propagación ascendente y manejo de clones.
-| Los valores de las hojas se combinan en las compuertas respetando el álgebra de semirregistros (AND suma costos/multiplica probabilidades; OR toma mínimos/máximos); los nodos repetidos se tratan como clones para no distorsionar el cálculo
-| Se suman costos en compuertas disyuntivas OR; existen nodos hoja sin valores asignados o los clones se evalúan como eventos físicamente independientes duplicando costos erróneamente
-|===
-
-==== 3.1.9. Recursos y Lecturas Recomendadas
-- *Artículo Seminal Original:* Schneier, B. (1999). _Attack Trees: Modeling security threats_. Dr. Dobb's Journal, 24(12), 21-29
-- *Fundamentación Matemática y Semántica Formal:* Mauw, S., & Oostdijk, M. (2005). _Foundations of Attack Trees_. International Conference on Information Security and Cryptology (ICISC 2005), LNCS 3935, pp. 186-198
-- *Tratamiento de Clones e Información Incompleta:* Buldas, A., Gadyatskaya, O., Mauw, S., Lenin, A., & Trujillo-Rasua, R. (2019). _Attribute Evaluation on Attack Trees with Incomplete Information_. Computers & Security / arXiv:1812.10754
-- *Análisis Formal y Tesis Doctoral:* Wideł, W. (2019). _Formal modeling and quantitative analysis of security using attack-defense trees_. Université Bretagne Loire / INSA Rennes.
-- *Casos Prácticos en Software Distribuido:* Saini, V., Duan, Q., & Paruchuri, V. (2008). _Threat Modeling Using Attack Trees (MyProxy Case Study)_. Journal of Computing Sciences in Colleges, 23(4), 124-131
-- *Tutoriales y Guías Técnicas de la Industria:* NCSC UK (2023). _Using attack trees to understand cyber security risk_. National Cyber Security Centre.
-
-// ---------------------------------------------------------
-// ARTEFACTO 3.2: DATA FLOW DIAGRAM (DFD) ENFOCADO A AMENAZAS
-// ---------------------------------------------------------
-=== 3.2. Data Flow Diagram (DFD)
-_(Estructura idéntica...)_
-
-// ---------------------------------------------------------
-// ARTEFACTO 3.3: MISUSE / ABUSE CASE
-// ---------------------------------------------------------
-=== 3.3. Misuse / Abuse Case
-_(Estructura idéntica...)_
+[6] OWASP, "Threat Modeling Manifesto", 2025.
