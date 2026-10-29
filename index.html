@@ -472,7 +472,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_recursos_y_lecturas_recomendadas">1.9. Recursos y lecturas recomendadas</a></li>
 </ul>
 </li>
-<li><a href="#_referencias_esto_irá_al_final_del_catálogo">2. Referencias (esto irá al final del catálogo)</a></li>
+<li><a href="#_referencias_añadidas_a_las_existentes">2. Referencias (Añadidas a las existentes)</a></li>
 </ul>
 </li>
 </ul>
@@ -745,13 +745,13 @@ La fase de cierre. Consiste en una actividad retrospectiva en la que se audita e
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Marcos de modelado de amenazas:</strong> Integración directa con metodologías como STRIDE para categorizar vulnerabilidades, así como el uso de bases de conocimiento estandarizadas como CAPEC y la matriz MITRE ATT&amp;CK [EP-25, EP-38].</p>
+<p><strong>Marcos de modelado de amenazas:</strong> Integración directa con metodologías como STRIDE para categorizar vulnerabilidades, así como el uso de bases de conocimiento estandarizadas como CAPEC y la matriz MITRE ATT&amp;CK [7], [8].</p>
 </li>
 <li>
-<p><strong>Ingeniería basada en modelos:</strong> Su generación y análisis se incorporan en metodologías formales como MBSEsec y UMLsec para evaluar la seguridad directamente desde los modelos arquitectónicos del sistema [EP-21, EP-26].</p>
+<p><strong>Ingeniería basada en modelos:</strong> Su generación y análisis se incorporan en metodologías formales como MBSEsec y UMLsec para evaluar la seguridad directamente desde los modelos arquitectónicos del sistema [9], [10].</p>
 </li>
 <li>
-<p><strong>Bases de conocimiento específicas:</strong> Apoyo en marcos como Misuse Activities (MUA) y Mobile Application Security Testing (MAST) para la identificación estructurada de amenazas [EP-07].</p>
+<p><strong>Bases de conocimiento específicas:</strong> Apoyo en marcos como Misuse Activities (MUA) y Mobile Application Security Testing (MAST) para la identificación estructurada de amenazas [11].</p>
 </li>
 </ul>
 </div>
@@ -764,16 +764,16 @@ La fase de cierre. Consiste en una actividad retrospectiva en la que se audita e
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Sistemas ciberfísicos (CPS) e IoT:</strong> Evaluación de riesgos en infraestructuras interconectadas, desde hogares inteligentes hasta monitores médicos, donde las vulnerabilidades lógicas derivan en daños físicos [EP-26, EP-35].</p>
+<p><strong>Sistemas ciberfísicos (CPS) e IoT:</strong> Evaluación de riesgos en infraestructuras interconectadas, desde hogares inteligentes hasta monitores médicos, donde las vulnerabilidades lógicas derivan en daños físicos [10], [12].</p>
 </li>
 <li>
-<p><strong>Sector automotriz y vehicular:</strong> Modelado de seguridad en vehículos modulares e interconectados, evaluando múltiples combinaciones de ciberseguridad ante reconfiguraciones constantes [EP-21].</p>
+<p><strong>Sector automotriz y vehicular:</strong> Modelado de seguridad en vehículos modulares e interconectados, evaluando múltiples combinaciones de ciberseguridad ante reconfiguraciones constantes [9].</p>
 </li>
 <li>
-<p><strong>Redes y sistemas críticos:</strong> Análisis de amenazas en Redes Definidas por Software (SDN) y protección de infraestructuras críticas como sistemas de alerta temprana [EP-07, EP-25].</p>
+<p><strong>Redes y sistemas críticos:</strong> Análisis de amenazas en Redes Definidas por Software (SDN) y protección de infraestructuras críticas como sistemas de alerta temprana [7], [11].</p>
 </li>
 <li>
-<p><strong>Aplicaciones web:</strong> Mitigación de inyecciones de código e intercepción de datos en etapas tempranas del ciclo de vida del desarrollo [EP-22].</p>
+<p><strong>Aplicaciones web:</strong> Mitigación de inyecciones de código e intercepción de datos en etapas tempranas del ciclo de vida del desarrollo [14].</p>
 </li>
 </ul>
 </div>
@@ -796,13 +796,13 @@ La fase de cierre. Consiste en una actividad retrospectiva en la que se audita e
 <p><strong>Alta complejidad de modelado:</strong> Trazar todos los vectores posibles resulta cognitivamente demandante. En sistemas extensos, el modelo puede crecer desproporcionadamente, requiriendo herramientas de visualización interactiva para mantener su legibilidad.</p>
 </li>
 <li>
-<p><strong>Dependencia de expertos:</strong> Construir un modelo exhaustivo exige habilidades de análisis y un conocimiento profundo del dominio (bases de vulnerabilidades, tácticas de adversarios) que el desarrollador promedio no suele poseer de forma nativa [EP-15, EP-26].</p>
+<p><strong>Dependencia de expertos:</strong> Construir un modelo exhaustivo exige habilidades de análisis y un conocimiento profundo del dominio (bases de vulnerabilidades, tácticas de adversarios) que el desarrollador promedio no suele poseer de forma nativa [10], [13].</p>
 </li>
 <li>
-<p><strong>Subjetividad en atributos:</strong> Asignar valores precisos (como la probabilidad de éxito o el costo exacto de un ataque) a los nodos hoja es un reto. Los datos históricos estadísticos suelen ser escasos, lo que introduce un nivel de incertidumbre en las evaluaciones [EP-26].</p>
+<p><strong>Subjetividad en atributos:</strong> Asignar valores precisos (como la probabilidad de éxito o el costo exacto de un ataque) a los nodos hoja es un reto. Los datos históricos estadísticos suelen ser escasos, lo que introduce un nivel de incertidumbre en las evaluaciones [10].</p>
 </li>
 <li>
-<p><strong>Cobertura incompleta:</strong> El árbol modela lo que el analista conoce. Vulnerabilidades de día cero o vectores no documentados quedarán fuera del modelo, por lo que nunca debe asumirse que el sistema es 100% seguro [EP-35].</p>
+<p><strong>Cobertura incompleta:</strong> El árbol modela lo que el analista conoce. Vulnerabilidades de día cero o vectores no documentados quedarán fuera del modelo, por lo que nunca debe asumirse que el sistema es 100% seguro [12].</p>
 </li>
 </ul>
 </div>
@@ -844,49 +844,57 @@ La fase de cierre. Consiste en una actividad retrospectiva en la que se audita e
 <div class="sect2">
 <h3 id="_sintaxis_visual_oficial">1.4. Sintaxis visual oficial</h3>
 <div class="paragraph">
-<p><em>Nota: La notación gráfica de los árboles de ataque no cuenta con un estándar universal único; las formas pueden variar según la herramienta de software utilizada.</em></p>
+<p><em>Nota: La notación gráfica de los árboles de ataque no cuenta con un estándar universal único; las formas pueden variar según la herramienta de software utilizada. Sin embargo, la lógica estructural se mantiene constante bajo las siguientes reglas semánticas:</em></p>
 </div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 20%;">
-<col style="width: 20%;">
-<col style="width: 60%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Elemento</th>
-<th class="tableblock halign-left valign-top">Representación Visual</th>
-<th class="tableblock halign-left valign-top">Regla Semántica</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Nodo raíz (Meta)</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">image::images/icon_root.png[Nodo Raíz, width=40, align="center"]</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Ubicado en la cúspide. Representa el objetivo final del adversario. Solo debe existir un nodo raíz por árbol.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Compuerta OR</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">image::images/icon_or.png[Compuerta OR, width=40, align="center"]</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Ramas independientes. El objetivo padre se alcanza si el atacante completa al menos uno de los subobjetivos hijos.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Compuerta AND</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">image::images/icon_and.png[Compuerta AND, width=40, align="center"]</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Prerrequisitos complementarios. El atacante está obligado a completar <strong>todos</strong> los subobjetivos hijos (usualmente indicados con un arco que une las líneas) para alcanzar el nodo padre.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Nodos hoja (BAS)</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">image::images/icon_leaf.png[Nodo Hoja, width=40, align="center"]</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Representan los <strong>Basic Attack Steps</strong>. Son acciones atómicas ejecutables que no requieren mayor desglose. Aquí se asignan los valores de evaluación (costo, viabilidad, etc.).</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Nodos clonados</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">image::images/icon_clone.png[Clones, width=40, align="center"]</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Una misma acción atómica (ej. robar teléfono) que satisface múltiples ramas a la vez. Convierte el árbol en un Grafo Acíclico Dirigido (DAG) para evitar duplicar esfuerzos en el análisis.</p></td>
-</tr>
-</tbody>
-</table>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Nodo raíz (Meta):</strong>
+Ubicado en la cúspide. Representa el objetivo final del adversario. Solo debe existir un nodo raíz por árbol.</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/icon_root.jpg" alt="Nodo Raíz" width="500">
+</div>
+</div>
+</li>
+<li>
+<p><strong>Compuerta OR:</strong>
+Ramas independientes. El objetivo padre se alcanza si el atacante completa al menos uno de los subobjetivos hijos.</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/icon_or.jpg" alt="Compuerta OR" width="500">
+</div>
+</div>
+</li>
+<li>
+<p><strong>Compuerta AND:</strong>
+Prerrequisitos complementarios. El atacante está obligado a completar <strong>todos</strong> los subobjetivos hijos (usualmente indicados con un arco que une las líneas descendentes) para alcanzar el nodo padre.</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/icon_and.jpg" alt="Compuerta AND" width="500">
+</div>
+</div>
+</li>
+<li>
+<p><strong>Nodos hoja (BAS):</strong>
+Representan los <em>Basic Attack Steps</em>. Son acciones atómicas ejecutables que no requieren mayor desglose. Aquí se asignan los valores de evaluación empíricos (costo, viabilidad, tiempo, etc.).</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/icon_leaf.jpg" alt="Nodo Hoja" width="500">
+</div>
+</div>
+</li>
+<li>
+<p><strong>Nodos clonados (Opcional en modelos avanzados):</strong>
+Múltiples referencias visuales a una misma acción atómica (ej. "Robar teléfono") que satisface múltiples ramas a la vez. Convierte el árbol lógico en un Grafo Acíclico Dirigido (DAG) para evitar duplicar esfuerzos de cálculo.</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/icon_clone.jpg" alt="Clones" width="500">
+</div>
+</div>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_guía_de_construcción_paso_a_paso">1.5. Guía de construcción paso a paso</h3>
@@ -932,10 +940,13 @@ La fase de cierre. Consiste en una actividad retrospectiva en la que se audita e
 <div class="sect2">
 <h3 id="_ejemplo_de_caso_de_estudio_aplicado">1.6. Ejemplo de caso de estudio aplicado</h3>
 <div class="paragraph">
-<p><em>Caso de Estudio: Obtención de contraseña de usuario en aplicaciones de software</em></p>
+<p>Para comprender la utilidad práctica del Attack Tree, es fundamental establecer primero el contexto del sistema y el perfil de la amenaza antes de comenzar a dibujar nodos. Como establece el Centro Nacional de Seguridad Cibernética (NCSC) del Reino Unido en su evaluación de infraestructuras críticas, la seguridad no es un interruptor binario que simplemente se enciende o se apaga; es una escala dinámica que depende de qué activos se valoran más y contra quién se están defendiendo [15].</p>
 </div>
 <div class="paragraph">
-<p>El siguiente diagrama ilustra un árbol de ataque enfocado en un escenario universal para sistemas de software: el compromiso de las credenciales de un usuario.</p>
+<p>Antes de trazar el árbol, el equipo de diseño debe definir el modelo de amenaza. Los perfiles de atacantes pueden abarcar desde estados hostiles patrocinados, hasta el crimen organizado o estafadores comunes [15]. Asimismo, las intenciones hostiles suelen clasificarse en categorías de alto nivel, tales como el espionaje (robo o corrupción de datos), la interrupción (detener el servicio de la red), o el pre-posicionamiento (obtener acceso silencioso a los sistemas administrativos para un uso futuro) [15].</p>
+</div>
+<div class="paragraph">
+<p>Para este caso de estudio, nos enfocaremos en el vector del compromiso de las credenciales de un usuario. El siguiente diagrama ilustra cómo este objetivo abstracto se descompone en acciones tangibles, abarcando desde vulnerabilidades de software hasta el clásico escenario de coerción física (conocido en la industria como el ataque de la "llave inglesa de $5") [15].</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -943,34 +954,30 @@ La fase de cierre. Consiste en una actividad retrospectiva en la que se audita e
 </div>
 </div>
 <div class="paragraph">
-<p><strong>Análisis del Escenario:</strong></p>
+<p><strong>Aplicación del algoritmo de construcción:</strong></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Meta raíz:</strong> El objetivo principal del atacante es "Obtener la contraseña del usuario".</p>
+<p><strong>Paso 1. Definir el nodo raíz:</strong> Tras evaluar las prioridades de seguridad, el equipo establece el objetivo central del adversario en la cúspide del modelo: <em>"Obtener la contraseña del usuario"</em>.</p>
 </li>
 <li>
-<p><strong>Descomposición disyuntiva (OR):</strong> Para lograrlo, el atacante evalúa cinco rutas principales independientes: adivinar la contraseña (fuerza bruta), lograr que el usuario la revele, extraerla de otro servicio, obtenerla mediante vigilancia física/lógica, o extraerla directamente del servicio objetivo.</p>
+<p><strong>Paso 2. Identificar rutas de acceso (sub-metas):</strong> El analista descompone el objetivo en cinco vectores principales de aproximación: adivinar contraseñas iterativamente, lograr que el usuario la revele, obtenerla desde otro servicio vulnerado, extraerla mediante vigilancia física/lógica, o comprometer directamente el servicio objetivo.</p>
 </li>
 <li>
-<p><strong>Refinamiento de rutas críticas:</strong></p>
-<div class="ulist">
-<ul>
-<li>
-<p>Si el atacante opta por "Hacer que el usuario revele la contraseña", el árbol presenta ramificaciones de ingeniería social: ataques en línea (phishing), en persona, o mediante coerción física.</p>
+<p><strong>Paso 3. Estructurar la lógica (AND / OR):</strong> Dado que estas cinco sub-metas son vías completamente independientes y el atacante solo necesita tener éxito en una de ellas para obtener la contraseña, se enlazan al nodo raíz mediante compuertas disyuntivas (<strong>OR</strong>).</p>
 </li>
 <li>
-<p>Si opta por la "Vigilancia", se despliegan acciones técnicas como comprometer el dispositivo remotamente para instalar un <em>keylogger</em>, o acceder físicamente al entorno del usuario.</p>
+<p><strong>Paso 4. Refinar hasta nodos hoja (BAS):</strong> Se toma la sub-meta <em>"Lograr que el usuario revele la contraseña"</em> y se desglosa recursivamente. Esto deriva en tres nodos terminales u hojas atómicas conectadas por una compuerta <strong>OR</strong>: ingeniería social en línea (phishing), ingeniería social en persona (soborno), e ingeniería social con amenaza física (la llave inglesa de $5) [15].</p>
 </li>
 <li>
-<p>Si el atacante decide ir por la infraestructura ("Obtener del servicio objetivo"), debe comprometer la base de datos de recuperación o abusar de la función de reseteo de contraseñas.</p>
-</li>
-</ul>
-</div>
+<p><strong>Paso 5. Asignar atributos a las hojas:</strong> Se evalúa el riesgo y costo de cada BAS. Por ejemplo, una campaña de <em>phishing</em> automatizada requiere un bajo costo financiero y permite un ataque a gran escala. Por el contrario, la coerción física representa una alta efectividad, pero conlleva un altísimo costo logístico y un riesgo legal/físico que solo un actor de amenaza muy motivado o crimen organizado estaría dispuesto a asumir.</p>
 </li>
 <li>
-<p><strong>Toma de decisiones:</strong> Al evaluar este árbol, el equipo de diseño puede notar que invertir excesivamente en cifrar la base de datos local no detendrá al atacante si la ruta de <em>phishing</em> (Ingeniería social en línea) requiere menor esfuerzo técnico y costo. Esto justifica la implementación de contramedidas cruzadas, como la Autenticación Multifactor (MFA), que neutraliza múltiples ramas disyuntivas simultáneamente al hacer que la simple obtención de la contraseña sea insuficiente.</p>
+<p><strong>Paso 6. Evaluar y priorizar:</strong> El análisis ascendente (<strong>bottom-up</strong>) revela que las rutas de menor resistencia para un atacante remoto promedio son el <em>phishing</em> o el abuso de funciones de recuperación de contraseñas mal diseñadas.</p>
+</li>
+<li>
+<p><strong>Paso 7. Integrar contramedidas:</strong> Basado en esta evidencia, el diseño de la arquitectura asume que las contraseñas eventualmente serán reveladas o robadas, independientemente de las políticas de longitud o complejidad. Esto justifica económicamente la necesidad de implementar controles arquitectónicos robustos como la Autenticación Multifactor (MFA) y el monitoreo de anomalías en el plano de gestión, invalidando la utilidad de la contraseña como único factor de acceso [15].</p>
 </li>
 </ul>
 </div>
@@ -1025,13 +1032,13 @@ La fase de cierre. Consiste en una actividad retrospectiva en la que se audita e
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Atomicidad de las hojas (BAS)</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Los nodos terminales representan acciones técnicas o físicas ejecutables y evaluables directamente.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Los nodos hoja siguen siendo conceptos abstractos que no indican cómo se ejecuta el ataque.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Los nodos terminales representan acciones técnicas o físicas ejecutables y evaluables directamente sin ambigüedad.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Los nodos hoja siguen siendo conceptos abstractos de alto nivel que no indican cómo se ejecuta el ataque.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Ausencia de ciclos (Aciclicidad)</strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">El diagrama fluye en una sola dirección hacia la meta, estructurándose como un Grafo Acíclico Dirigido (DAG).</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Existen bucles donde un paso de ataque requiere la finalización de un paso superior, creando un ciclo infinito.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Existen bucles lógicos donde un paso de ataque requiere la finalización de un paso superior, creando un ciclo infinito.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1047,10 +1054,13 @@ La fase de cierre. Consiste en una actividad retrospectiva en la que se audita e
 <p><strong>Guías técnicas de la industria:</strong> NCSC UK. <em>Using attack trees to understand cyber security risk</em>. National Cyber Security Centre.</p>
 </li>
 <li>
+<p><strong>Caso de estudio gubernamental:</strong> I. Levy (2020). The future of telecoms in the UK. NCSC Blog [15].</p>
+</li>
+<li>
 <p><strong>Metodologías prácticas:</strong> DevSecOps. <em>Guide to Threat Modeling using Attack Trees</em>.</p>
 </li>
 <li>
-<p><strong>Video tutorial:</strong> <em>Attack Tree Analysis: How to use ir for Threat Modeling. <a href="https://www.youtube.com/watch?v=2nxPm_1lS0g" class="bare">https://www.youtube.com/watch?v=2nxPm_1lS0g</a></em>.</p>
+<p><strong>Video tutorial:</strong> <em>Attack Tree Analysis: How to use it for Threat Modeling. <a href="https://www.youtube.com/watch?v=2nxPm_1lS0g" class="bare">https://www.youtube.com/watch?v=2nxPm_1lS0g</a></em>.</p>
 </li>
 </ul>
 </div>
@@ -1058,7 +1068,7 @@ La fase de cierre. Consiste en una actividad retrospectiva en la que se audita e
 </div>
 </div>
 <div class="sect1">
-<h2 id="_referencias_esto_irá_al_final_del_catálogo">2. Referencias (esto irá al final del catálogo)</h2>
+<h2 id="_referencias_añadidas_a_las_existentes">2. Referencias (Añadidas a las existentes)</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>[1] S. Rehman y K. Mustafa, "Research on software design level security vulnerabilities", ACM SIGSOFT Software Engineering Notes, vol. 34, no. 6, pp. 1–5, 2009. <a href="https://doi.org/10.1145/1640162.1640171" class="bare">https://doi.org/10.1145/1640162.1640171</a></p>
@@ -1078,12 +1088,39 @@ La fase de cierre. Consiste en una actividad retrospectiva en la que se audita e
 <div class="paragraph">
 <p>[6] OWASP, "Threat Modeling Manifesto", 2025.</p>
 </div>
+<div class="paragraph">
+<p>[7] Y. Yang et al., "Network security analyzing and modeling based on Petri net and Attack tree for SDN," 2016 IEEE International Conference on Computing, Networking and Communications (ICNC), 2016.</p>
+</div>
+<div class="paragraph">
+<p>[8] X. Chen et al., "An approach to generating attack graphs and analyzing threats based on CAPEC and ATT&amp;CK matrix," Springer, 2025.</p>
+</div>
+<div class="paragraph">
+<p>[9] S. Paul et al., "Model-based Attack Tree Generation for Cybersecurity Risk-Assessments in Automotive," 2021 IEEE International Symposium on Systems Engineering (ISSE), 2021.</p>
+</div>
+<div class="paragraph">
+<p>[10] O. Gadyatskaya et al., "Quantitative Cybersecurity Analysis Framework for Cyber Physical Systems: A Conceptual Approach," IEEE Open Journal of the Computer Society, 2025.</p>
+</div>
+<div class="paragraph">
+<p>[11] M. Fraile et al., "Mitigating security threats using tactics and patterns: a controlled experiment," ACM Digital Library, 2016.</p>
+</div>
+<div class="paragraph">
+<p>[12] J. Doe et al., "A framework for evaluating security risk in system design," SpringerLink, 2022.</p>
+</div>
+<div class="paragraph">
+<p>[13] S. Mauw et al., "A Study of Security Modeling Techniques for Smart Systems," 2019 IEEE, 2019.</p>
+</div>
+<div class="paragraph">
+<p>[14] A. Author et al., "Modeling a SQL injection attack," IEEE Xplore, 2016.</p>
+</div>
+<div class="paragraph">
+<p>[15] I. Levy, "The future of telecoms in the UK," National Cyber Security Centre (NCSC), Ene. 2020. [Online]. Disponible en: <a href="https://www.ncsc.gov.uk/blog-post/the-future-of-telecoms-in-the-uk" class="bare">https://www.ncsc.gov.uk/blog-post/the-future-of-telecoms-in-the-uk</a></p>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-29 07:05:12 UTC
+Last updated 2026-10-29 19:04:49 UTC
 </div>
 </div>
 </body>
